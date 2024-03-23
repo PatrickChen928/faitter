@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
+    "@nuxt/image"
   ],
 
   shadcn: {
@@ -45,6 +46,10 @@ export default defineNuxtConfig({
 
   colorMode: {
     classSuffix: '',
+  },
+
+  devServer: {
+    port: 5152,
   },
 
   nitro: {
