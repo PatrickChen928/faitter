@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
-    "@nuxt/image"
+    '@nuxt/image',
   ],
 
   shadcn: {
@@ -22,7 +22,7 @@ export default defineNuxtConfig({
      * Directory that the component lives in.
      * @default "./components/ui"
      */
-    componentDir: './components/ui'
+    componentDir: './components/ui',
   },
 
   experimental: {
@@ -34,7 +34,7 @@ export default defineNuxtConfig({
   },
 
   css: [
-    '~/assets/css/main.css',
+    '~/assets/css/tailwind.css',
   ],
 
   postcss: {
@@ -65,12 +65,16 @@ export default defineNuxtConfig({
     },
   },
 
+  image: {
+    dir: 'assets/img',
+  },
+
   app: {
     head: {
       viewport: 'width=device-width,initial-scale=1',
       link: [
         { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
-        { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
+        { rel: 'icon', type: 'image/svg+xml', href: '~/assets/logo.svg' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
       ],
       meta: [
