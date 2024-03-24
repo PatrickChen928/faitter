@@ -1,2 +1,2 @@
-export const appName = 'Vitesse for Nuxt 3'
-export const appDescription = 'Vitesse for Nuxt 3'
+export const appName = 'Faitter | A Social Media App'
+export const appDescription = 'A social media app built with Nuxt 3 and Tailwind CSS'
