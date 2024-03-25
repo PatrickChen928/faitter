@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
     '@nuxt/image',
+    '@nuxtjs/supabase'
   ],
 
   shadcn: {
@@ -68,7 +69,12 @@ export default defineNuxtConfig({
   image: {
     dir: 'assets',
   },
-
+  runtimeConfig: {
+    // eslint-disable-next-line node/prefer-global/process
+    supabaseApiKey: process.env.SUPABASE_API_KEY,
+    // eslint-disable-next-line node/prefer-global/process
+    supabaseUrl: process.env.SUPABASE_SERVER_URL,
+  },
   app: {
     head: {
       viewport: 'width=device-width,initial-scale=1',

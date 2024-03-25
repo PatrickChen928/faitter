@@ -4,14 +4,19 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { SignInValidation } from '@/lib/form-schema'
 import { login } from '@/lib/services/auth-service'
 
+const supabase = useSupabaseClient()
+
 const formSchema = toTypedSchema(SignInValidation)
 
 const { handleSubmit } = useForm({
   validationSchema: formSchema,
 })
 
-const onSubmit = handleSubmit((values) => {
-  login(values)
+const onSubmit = handleSubmit(async (values) => {
+  supabase.auth.signInWithPassword({
+    email: values.email,
+    password: values.password,
+  })
 })
 </script>
 
