@@ -17,8 +17,12 @@ const onSubmit = handleSubmit((values) => {
 
 <template>
   <div class="flex h-full">
-    <div class="flex-1 flex justify-center items-center">
-      <form class="w-[420px] p-10" @submit="onSubmit">
+    <div class="flex-1 flex flex-col justify-center items-center">
+      <NuxtImg src="/logo.svg" />
+      <h2 class="h3-bold md:h2-bold">
+        Welcome to Faitter!
+      </h2>
+      <form class="w-full max-w-[360px] p-10" @submit="onSubmit">
         <FormField v-slot="{ componentField }" name="email">
           <FormItem>
             <FormLabel>Email</FormLabel>
@@ -37,15 +41,15 @@ const onSubmit = handleSubmit((values) => {
             <FormMessage />
           </FormItem>
         </FormField>
-        <Button type="submit" class="mt-4">
-          Submit
+        <Button type="submit" class="block mt-4 mx-auto">
+          Login
         </Button>
       </form>
     </div>
     <NuxtImg
-      src="/login-bg.jpg"
+      src="/img/login-bg.jpg"
       alt="login"
-      class="w-1/2 h-full object-cover"
+      class="hidden lg:block w-1/2 h-full object-cover"
     />
   </div>
 </template>
