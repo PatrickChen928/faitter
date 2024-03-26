@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
     '@nuxt/image',
-    '@nuxtjs/supabase'
+    '@nuxtjs/supabase',
   ],
 
   shadcn: {
@@ -74,6 +74,18 @@ export default defineNuxtConfig({
     supabaseApiKey: process.env.SUPABASE_API_KEY,
     // eslint-disable-next-line node/prefer-global/process
     supabaseUrl: process.env.SUPABASE_SERVER_URL,
+  },
+  supabase: {
+    redirectOptions: {
+      login: '/login',
+      callback: '/',
+      include: undefined,
+      exclude: [
+        '/',
+        '/signup',
+      ],
+      cookieRedirect: false,
+    },
   },
   app: {
     head: {
