@@ -24,10 +24,10 @@ const onSubmit = handleSubmit(async (values) => {
   <div class="flex h-full">
     <div class="flex-1 flex flex-col justify-center items-center">
       <NuxtImg src="/logo.svg" />
-      <h2 class="h3-bold md:h2-bold">
+      <h2 class="h3-semibold md:h2-semibold">
         Welcome to Faitter!
       </h2>
-      <form class="w-full max-w-[360px] p-10" @submit="onSubmit">
+      <form class="mt-4 w-full max-w-[360px] px-10" @submit="onSubmit">
         <FormField v-slot="{ componentField }" name="email">
           <FormItem>
             <FormLabel>Email</FormLabel>
