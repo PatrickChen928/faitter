@@ -2,9 +2,6 @@
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { SignUpValidation } from '@/lib/form-schema'
-import { login } from '@/lib/services/auth-service'
-
-const supabase = useSupabaseClient()
 
 const formSchema = toTypedSchema(SignUpValidation)
 
@@ -12,11 +9,27 @@ const { handleSubmit } = useForm({
   validationSchema: formSchema,
 })
 
-const onSubmit = handleSubmit(async (values) => {
-  supabase.auth.signInWithPassword({
-    email: values.email,
-    password: values.password,
+const form = ref({
+  username: '',
+  email: '',
+  password: '',
+})
+const { execute, pending } = useAsyncData(() => {
+  return $fetch('/api/signup', {
+    method: 'POST',
+    body: JSON.stringify(form.value),
   })
+}, {
+  immediate: false,
+})
+
+const onSubmit = handleSubmit((values) => {
+  form.value = {
+    username: values.username.trim(),
+    email: values.email.trim(),
+    password: values.password.trim(),
+  }
+  execute()
 })
 </script>
 
@@ -63,7 +76,7 @@ const onSubmit = handleSubmit(async (values) => {
         </Button>
         <p class="small-regular text-muted-foreground text-center mt-2">
           Already have an account? <NuxtLink to="/sign-in" class="text-primary-500 small-semibold ml-1">
-            Log in
+            <NuxtImg v-if="pending" src="/img/loading.svg" />Log in
           </NuxtLink>
         </p>
       </form>
