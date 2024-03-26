@@ -71,12 +71,12 @@ const onSubmit = handleSubmit((values) => {
             <FormMessage />
           </FormItem>
         </FormField>
-        <Button type="submit" class="w-full mt-4">
-          Sign up
+        <Button type="submit" class="w-full mt-4 flex items-center gap-2">
+          <NuxtImg v-if="pending" src="/img/loading.svg" /> Sign up
         </Button>
         <p class="small-regular text-muted-foreground text-center mt-2">
           Already have an account? <NuxtLink to="/sign-in" class="text-primary-500 small-semibold ml-1">
-            <NuxtImg v-if="pending" src="/img/loading.svg" />Log in
+            Log in
           </NuxtLink>
         </p>
       </form>
