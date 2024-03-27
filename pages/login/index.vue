@@ -16,23 +16,20 @@ const { handleSubmit } = useForm({
 })
 
 const onSubmit = handleSubmit(async (values) => {
-  try {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: values.email,
-      password: values.password,
+  loading.value = true
+  const { error } = await supabase.auth.signInWithPassword({
+    email: values.email,
+    password: values.password,
+  })
+  loading.value = false
+  if (error) {
+    toast({
+      title: error.message,
+      variant: 'destructive',
     })
-    if (error) {
-      toast({
-        title: error.message,
-        variant: 'destructive',
-      })
-      return
-    }
-    router.push('/')
+    return
   }
-  catch (e) {
-    console.error(e)
-  }
+  router.push('/')
 })
 </script>
 
