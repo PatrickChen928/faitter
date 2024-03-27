@@ -2,8 +2,10 @@
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { SignUpValidation } from '@/lib/form-schema'
+import { useToast } from '@/components/ui/toast/use-toast'
 
 const router = useRouter()
+const { toast } = useToast()
 
 const formSchema = toTypedSchema(SignUpValidation)
 
@@ -16,7 +18,7 @@ const form = ref({
   email: '',
   password: '',
 })
-const { execute, status } = useAsyncData(() => {
+const { execute, status, error } = await useAsyncData('signup', () => {
   return $fetch('/api/signup', {
     method: 'POST',
     body: JSON.stringify(form.value),
@@ -25,15 +27,21 @@ const { execute, status } = useAsyncData(() => {
   immediate: false,
 })
 
-const onSubmit = handleSubmit((values) => {
+const onSubmit = handleSubmit(async (values) => {
   form.value = {
     username: values.username.trim(),
     email: values.email.trim(),
     password: values.password.trim(),
   }
-  execute().then(() => {
-    router.push('/login')
-  })
+  await execute()
+  if (error.value) {
+    toast({
+      title: error.value.message,
+      variant: 'destructive',
+    })
+    return
+  }
+  router.push('/login')
 })
 </script>
 
