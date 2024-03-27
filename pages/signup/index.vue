@@ -3,6 +3,8 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { SignUpValidation } from '@/lib/form-schema'
 
+const router = useRouter()
+
 const formSchema = toTypedSchema(SignUpValidation)
 
 const { handleSubmit } = useForm({
@@ -14,7 +16,7 @@ const form = ref({
   email: '',
   password: '',
 })
-const { execute, pending } = useAsyncData(() => {
+const { execute, status } = useAsyncData(() => {
   return $fetch('/api/signup', {
     method: 'POST',
     body: JSON.stringify(form.value),
@@ -29,7 +31,9 @@ const onSubmit = handleSubmit((values) => {
     email: values.email.trim(),
     password: values.password.trim(),
   }
-  execute()
+  execute().then(() => {
+    router.push('/login')
+  })
 })
 </script>
 
@@ -71,9 +75,9 @@ const onSubmit = handleSubmit((values) => {
             <FormMessage />
           </FormItem>
         </FormField>
-        <Button type="submit" class="w-full mt-4 flex items-center gap-2">
-          <NuxtImg v-if="pending" src="/img/loading.svg" /> Sign up
-        </Button>
+        <ButtonLoading type="submit" class="w-full mt-4" :loading="status === 'pending'">
+          Sign up
+        </ButtonLoading>
         <p class="small-regular text-muted-foreground text-center mt-2">
           Already have an account? <NuxtLink to="/sign-in" class="text-primary-500 small-semibold ml-1">
             Log in
