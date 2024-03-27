@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
+import { useToast } from '@/components/ui/toast/use-toast'
 import { SignInValidation } from '@/lib/form-schema'
-import { login } from '@/lib/services/auth-service'
 
 const supabase = useSupabaseClient()
+const loading = ref(false)
+const router = useRouter()
+const { toast } = useToast()
 
 const formSchema = toTypedSchema(SignInValidation)
 
@@ -13,10 +16,23 @@ const { handleSubmit } = useForm({
 })
 
 const onSubmit = handleSubmit(async (values) => {
-  supabase.auth.signInWithPassword({
-    email: values.email,
-    password: values.password,
-  })
+  try {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: values.email,
+      password: values.password,
+    })
+    if (error) {
+      toast({
+        title: error.message,
+        variant: 'destructive',
+      })
+      return
+    }
+    router.push('/')
+  }
+  catch (e) {
+    console.error(e)
+  }
 })
 </script>
 
@@ -46,9 +62,9 @@ const onSubmit = handleSubmit(async (values) => {
             <FormMessage />
           </FormItem>
         </FormField>
-        <Button type="submit" class="w-full mt-4">
+        <ButtonLoading :loading="loading" type="submit" class="w-full mt-4">
           Login
-        </Button>
+        </ButtonLoading>
         <p class="small-regular text-muted-foreground text-center mt-2">
           Don't have an account? <NuxtLink to="/signup" class="text-primary-500 small-semibold ml-1">
             Sign up
