@@ -1,3 +1,12 @@
+<script setup lang="ts">
+const supabase = useSupabaseClient()
+const router = useRouter()
+async function handleLogout() {
+  await supabase.auth.signOut()
+  router.push('/login')
+}
+</script>
+
 <template>
   <nav>
     <div class="flex-between py-4 px-5">
@@ -7,7 +16,7 @@
       </NuxtLink>
       <div class="flex-shrink-0 flex gap-2">
         <DarkToggle class="h-10 w-10 p-1" />
-        <Button size="sm" variant="ghost" class="h-10 w-10 p-1">
+        <Button size="sm" variant="ghost" class="h-10 w-10 p-1" @click="handleLogout">
           <IconLogout class=" fill-primary" />
         </Button>
       </div>

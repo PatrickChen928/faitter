@@ -86,7 +86,7 @@ const onSubmit = handleSubmit(async (values) => {
           <FormMessage />
         </FormItem>
       </FormField>
-      <ButtonLoading type="submit" class="w-full mt-4" :loading="status === 'pending'">
+      <ButtonLoading variant="primary" type="submit" class="w-full mt-4" :loading="status === 'pending'">
         Sign up
       </ButtonLoading>
       <p class="small-regular text-muted-foreground text-center mt-2">

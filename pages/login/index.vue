@@ -62,7 +62,7 @@ const onSubmit = handleSubmit(async (values) => {
           <FormMessage />
         </FormItem>
       </FormField>
-      <ButtonLoading :loading="loading" type="submit" class="w-full mt-4">
+      <ButtonLoading variant="primary" :loading="loading" type="submit" class="w-full mt-4">
         Login
       </ButtonLoading>
       <p class="small-regular text-muted-foreground text-center mt-2">
