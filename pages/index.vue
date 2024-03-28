@@ -10,7 +10,7 @@ function handleLogout() {
 
 <template>
   <div>
-    <Logos mb-6 />
+    Home
     <Button @click="handleClick">
       Click me
     </Button>

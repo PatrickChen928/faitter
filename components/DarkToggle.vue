@@ -15,7 +15,8 @@ function toggleDark() {
 </script>
 
 <template>
-  <button class="!outline-none" @click="toggleDark">
-    <div class="i-carbon-sun dark:i-carbon-moon" />
-  </button>
+  <Button size="sm" variant="ghost" @click="toggleDark">
+    <IconMoon v-if="color.value === 'dark'" />
+    <IconSun v-else class=" fill-primary" />
+  </Button>
 </template>
