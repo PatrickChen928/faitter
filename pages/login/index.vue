@@ -39,7 +39,7 @@ const onSubmit = handleSubmit(async (values) => {
 
 <template>
   <div class="h-full flex flex-col justify-center items-center">
-    <Logos class="h-20" hidden-title />
+    <Logos class="h-20" hidden-title width="80" height="80" />
     <h2 class="h3-bold md:h2-bold pt-2">
       Welcome to Faitter!
     </h2>

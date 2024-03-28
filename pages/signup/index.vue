@@ -51,7 +51,7 @@ const onSubmit = handleSubmit(async (values) => {
 
 <template>
   <div class="h-full flex flex-col justify-center items-center">
-    <NuxtImg src="/logo.svg" />
+    <Logos hidden-title width="80" height="80" />
     <h2 class="h3-bold md:h2-bold pt-2">
       Create a new account
     </h2>

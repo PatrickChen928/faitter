@@ -1,6 +1,21 @@
 <script setup lang="ts">
 import { userInfoState as user } from '@/store/user'
 import { sidebarLinks } from '@/constants/menu'
+
+const route = useRoute()
+const activeLink = ref('')
+
+function setActiveLink(link: string) {
+  activeLink.value = link
+}
+
+watch(() => route.path, () => {
+  setActiveLink(route.path)
+}, { immediate: true })
+
+async function handleLogout() {
+  await logout()
+}
 </script>
 
 <template>
@@ -17,14 +32,29 @@ import { sidebarLinks } from '@/constants/menu'
       </NuxtLink>
       <ul class="flex flex-col gap-6">
         <li
-          v-for="item in sidebarLinks" :key="item.route" class="leftsidebar-link group"
+          v-for="item in sidebarLinks"
+          :key="item.route"
+          class="leftsidebar-link"
+          :class="{ 'bg-primary-500 text-white': activeLink === item.route }"
         >
-          <NuxtLink :to="item.route" class="flex gap-4 items-center p-4 group-hover:invert-white">
-            <NuxtImg :src="item.imgURL" :alt="item.label" />
+          <NuxtLink :to="item.route" class="flex gap-4 items-center p-4 hover:invert-white">
+            <NuxtImg
+              :src="item.imgURL"
+              :alt="item.label"
+              width="24"
+              height="24"
+              :class="{
+                'invert brightness-0': activeLink === item.route,
+              }"
+            />
             {{ item.label }}
           </NuxtLink>
         </li>
       </ul>
     </div>
+    <Button variant="ghost" class="flex items-center gap-2" @click="handleLogout">
+      <IconLogout class="fill-primary" />
+      <span class="small-medium lg:base-medium">Logout</span>
+    </Button>
   </nav>
 </template>

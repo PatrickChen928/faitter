@@ -1,9 +1,6 @@
 <script setup lang="ts">
-const supabase = useSupabaseClient()
-const router = useRouter()
 async function handleLogout() {
-  await supabase.auth.signOut()
-  router.push('/login')
+  await logout()
 }
 </script>
 
@@ -15,8 +12,8 @@ async function handleLogout() {
       </NuxtLink>
       <div class="flex-shrink-0 flex items-center gap-2">
         <DarkToggle class="h-10 w-10 p-1" />
-        <Button size="sm" variant="ghost" class="h-10 w-10 p-1" @click="handleLogout">
-          <IconLogout class=" fill-primary" />
+        <Button size="sm" variant="ghost" class="h-10 w-10 p-1 shad-button_ghost" @click="handleLogout">
+          <IconLogout class="fill-primary" />
         </Button>
         <Profile />
       </div>
