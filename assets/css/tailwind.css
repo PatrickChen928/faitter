@@ -292,7 +292,7 @@ body,
 
   /* Left sidebar */
   .leftsidebar {
-    @apply hidden md:flex px-6 py-10 flex-col justify-between min-w-[270px] bg-dark-2;
+    @apply hidden md:flex px-6 py-10 flex-col justify-between min-w-[270px] bg-slate-200 dark:bg-dark-2;
   }
 
   .leftsidebar-link {
@@ -310,7 +310,7 @@ body,
 
   /* Topbar */
   .topbar {
-    @apply sticky top-0 z-50 md:hidden bg-dark-2 w-full;
+    @apply sticky top-0 z-50 md:hidden bg-slate-200 dark:bg-dark-2 w-full;
   }
 
   /* User card */

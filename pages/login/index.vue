@@ -39,7 +39,7 @@ const onSubmit = handleSubmit(async (values) => {
 
 <template>
   <div class="h-full flex flex-col justify-center items-center">
-    <NuxtImg src="/logo.svg" />
+    <Logos class="h-20" hidden-title />
     <h2 class="h3-bold md:h2-bold pt-2">
       Welcome to Faitter!
     </h2>

@@ -21,14 +21,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="h-full w-full md:flex md:flex-col">
+  <main class="h-full w-full md:flex">
     <Topbar />
-    <div>
-      <LeftSidebar />
-      <section class="flex flex-1 h-full">
-        <slot />
-      </section>
-    </div>
+    <LeftSidebar />
+    <section class="flex flex-1 h-full">
+      <slot />
+    </section>
     <Toaster />
   </main>
 </template>
