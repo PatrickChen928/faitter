@@ -56,6 +56,6 @@ function toggleDark(event: any) {
 <template>
   <Button size="sm" variant="ghost" @click="toggleDark">
     <IconMoon v-if="color.value === 'dark'" />
-    <IconSun v-else class=" fill-primary" />
+    <IconSun v-else />
   </Button>
 </template>

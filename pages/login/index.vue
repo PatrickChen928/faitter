@@ -71,5 +71,9 @@ const onSubmit = handleSubmit(async (values) => {
         </NuxtLink>
       </p>
     </form>
+    <div class="flex items-center justify-center gap-2 mt-2">
+      <GithubLink />
+      <DarkToggle class="h-10 w-10 p-1" />
+    </div>
   </div>
 </template>

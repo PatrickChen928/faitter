@@ -52,9 +52,13 @@ async function handleLogout() {
         </li>
       </ul>
     </div>
-    <Button variant="ghost" class="flex items-center gap-2" @click="handleLogout">
-      <IconLogout class="fill-primary" />
-      <span class="small-medium lg:base-medium">Logout</span>
-    </Button>
+    <div class="flex items-center gap-2">
+      <Button variant="ghost" class="flex items-center gap-2" @click="handleLogout">
+        <IconLogout class="fill-primary" />
+        <span class="small-medium lg:base-medium">Logout</span>
+      </Button>
+      <DarkToggle class="h-10 w-10 p-1" />
+      <GithubLink />
+    </div>
   </nav>
 </template>
