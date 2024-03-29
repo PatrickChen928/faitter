@@ -5,7 +5,7 @@ import Toaster from '@/components/ui/toast/Toaster.vue'
 <template>
   <main class="h-full w-full">
     <div class="flex h-full">
-      <div class="w-1/2 h-full">
+      <div class="flex-1 h-full">
         <slot />
       </div>
       <NuxtImg
