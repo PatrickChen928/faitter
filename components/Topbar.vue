@@ -13,7 +13,7 @@ async function handleLogout() {
       <div class="flex-shrink-0 flex items-center gap-2">
         <GithubLink />
         <DarkToggle class="h-10 w-10 p-1" />
-        <Button size="sm" variant="ghost" class="h-10 w-10 p-1 shad-button_ghost" @click="handleLogout">
+        <Button size="sm" variant="ghost" class="h-10 w-10 p-1" @click="handleLogout">
           <IconLogout class="fill-primary" />
         </Button>
         <Profile />
