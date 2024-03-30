@@ -27,6 +27,8 @@ onMounted(() => {
     <section class="flex flex-1 h-full">
       <slot />
     </section>
+    <Bottombar />
+
     <Toaster />
   </main>
 </template>
