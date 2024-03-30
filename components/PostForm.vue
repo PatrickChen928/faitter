@@ -8,6 +8,7 @@ const props = defineProps<{
   post: Record<string, any>
 }>()
 
+const router = useRouter()
 const { toast } = useToast()
 const formSchema = toTypedSchema(CreatePostValidation)
 
@@ -39,6 +40,7 @@ const onSubmit = handleSubmit(async () => {
     toast({
       title: 'Post created successfully',
     })
+    router.push('/')
   }
 })
 
