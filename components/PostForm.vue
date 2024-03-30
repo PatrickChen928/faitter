@@ -3,9 +3,10 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { CreatePostValidation } from '@/lib/form-schema'
+import type { Post } from '@/types/database.types'
 
 const props = defineProps<{
-  post: Record<string, any>
+  post?: Post
 }>()
 
 const router = useRouter()
@@ -23,7 +24,11 @@ const { handleSubmit, values, setFieldValue } = useForm({
 })
 
 const { execute, error, status } = useAsyncData('createPost', async () => {
-  return await useCreatePost(values as IPost)
+  if (props.post)
+    return await useUpdatePost(props.post.id, values as IPost)
+  else
+
+    return await useCreatePost(values as IPost)
 }, {
   immediate: false,
 })

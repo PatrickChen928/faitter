@@ -49,6 +49,71 @@ export async function useCreatePost(post: IPost) {
   return data
 }
 
+export async function useUpdatePost(id: string, post: IPost) {
+  const user = authedUser()
+
+  const supabase = useSupabaseClient<Database>()
+
+  let fileUrl = ''
+  let filePath = ''
+  if (post.file && post.file.length) {
+    const file = post.file[0]
+    const { error, data: storage } = await supabase
+      .storage
+      .from(StorageBucket)
+      .upload(`${user.id}/${file.name}`, file, {
+        cacheControl: '3600',
+        upsert: true,
+      })
+    if (error)
+      throw error
+
+    filePath = storage?.path || ''
+    const res = supabase.storage.from(StorageBucket).getPublicUrl(filePath)
+
+    fileUrl = res.data.publicUrl || ''
+  }
+
+  const updateData: any = {
+    caption: post.caption,
+    creator: user.id,
+    location: post.location,
+    tags: post.tags?.split(','),
+  }
+
+  if (fileUrl) {
+    updateData.imageUrl = fileUrl
+    updateData.imageId = filePath
+  }
+
+  const { data, error } = await supabase.from(PostTableName).update(updateData).eq('id', id)
+
+  if (error)
+    throw error
+
+  return data
+}
+
+export async function useGetPostDetail(id: string) {
+  const supabase = useSupabaseClient<Database>()
+  const { data, error } = await supabase.from(PostTableName).select(`
+    id, 
+    caption,
+    imageUrl,
+    location,
+    tags,
+    creator,
+    createdAt,
+    likes,
+    user: creator ( id, username, imageUrl )
+  `).eq('id', id).single()
+
+  if (error)
+    throw error
+
+  return data as any as Post
+}
+
 export async function useGetPosts() {
   const supabase = useSupabaseClient<Database>()
   const { data, error } = await supabase.from(PostTableName).select(`

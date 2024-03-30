@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useDropzone } from 'vue3-dropzone'
 
-defineProps<{
-  mediaUrl: string
+const props = defineProps<{
+  mediaUrl?: string
 }>()
 
 const emit = defineEmits(['fieldChange'])
 
-const fileUrl = ref<string>()
+const fileUrl = ref<string>(props.mediaUrl || '')
 
 function onDrop(files: any[]) {
   const file = files[0]
