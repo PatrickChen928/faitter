@@ -5,6 +5,7 @@ import { useUserStore } from '@/store/user'
 
 defineProps<{
   post: Post
+  saved: boolean
 }>()
 
 const userStore = useUserStore()
@@ -64,6 +65,10 @@ const userStore = useUserStore()
         alt="post image"
       />
     </NuxtLink>
-    <PostStats :post="post" :user-id="userStore.user?.id" />
+    <PostStats
+      :post="post"
+      :user-id="userStore.user?.id"
+      :saved="saved"
+    />
   </div>
 </template>

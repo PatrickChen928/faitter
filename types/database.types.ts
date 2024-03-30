@@ -28,7 +28,7 @@ export interface Post {
   likes: string[]
 }
 
-export interface Like {
+export interface Save {
   id: string
   creator: string
 
@@ -51,6 +51,11 @@ export interface Database {
         Row: Post
         Insert: Partial<Post>
         Update: Partial<Post>
+      }
+      Save: {
+        Row: Save
+        Insert: Partial<Save>
+        Update: Partial<Save>
       }
     }
     Views: {
