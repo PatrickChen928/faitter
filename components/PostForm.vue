@@ -4,16 +4,47 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { CreatePostValidation } from '@/lib/form-schema'
 
+const props = defineProps<{
+  post: Record<string, any>
+}>()
+
+const { toast } = useToast()
 const formSchema = toTypedSchema(CreatePostValidation)
-const loading = ref(false)
 
-const { handleSubmit } = useForm({
+const { handleSubmit, values, setFieldValue } = useForm({
   validationSchema: formSchema,
+  initialValues: {
+    caption: props.post?.caption || '',
+    file: [] as File[],
+    location: props.post?.location || '',
+    tags: props.post?.tags?.join(',') || '',
+  },
 })
 
-const onSubmit = handleSubmit(async (values) => {
-
+const { execute, error, status } = useAsyncData('createPost', async () => {
+  return await useCreatePost(values as IPost)
+}, {
+  immediate: false,
 })
+
+const onSubmit = handleSubmit(async () => {
+  await execute()
+  if (error.value) {
+    toast({
+      title: 'Somethings went wrong, please try again',
+      variant: 'destructive',
+    })
+  }
+  else {
+    toast({
+      title: 'Post created successfully',
+    })
+  }
+})
+
+function handleFileChange(files: File[]) {
+  setFieldValue('file', files)
+}
 </script>
 
 <template>
@@ -29,11 +60,14 @@ const onSubmit = handleSubmit(async (values) => {
         <FormMessage />
       </FormItem>
     </FormField>
-    <FormField v-slot="{ componentField }" name="file">
+    <FormField name="file">
       <FormItem>
         <FormLabel>Add Photos</FormLabel>
         <FormControl>
-          <FileUpload v-bind="componentField" />
+          <FileUpload
+            :media-url="props.post?.imageUrl"
+            @field-change="files => handleFileChange(files)"
+          />
         </FormControl>
         <FormMessage />
       </FormItem>
@@ -64,7 +98,7 @@ const onSubmit = handleSubmit(async (values) => {
       <Button type="button" class="shad-button_dark_4">
         Cancel
       </Button>
-      <ButtonLoading variant="primary" :loading="loading" type="submit">
+      <ButtonLoading variant="primary" :loading="status === 'pending'" type="submit">
         Submit
       </ButtonLoading>
     </div>

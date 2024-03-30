@@ -22,6 +22,11 @@ export interface Database {
         Insert: Partial<User>
         Update: Partial<User>
       }
+      Post: {
+        Row: Partial<Post>
+        Insert: Partial<Post>
+        Update: Partial<Post>
+      }
     }
     Views: {
       [_ in never]: never
@@ -36,4 +41,15 @@ export interface Database {
       [_ in never]: never
     }
   }
+}
+
+export interface Post {
+  id: string
+  creator: string
+  caption: string
+  tags: string[]
+  location: string
+  imageUrl: string
+  imageId: string
+  createdAt: string
 }
