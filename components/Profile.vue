@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { useUserStore } from '@/store/user'
 
-const { userInfo: user } = useUserStore()
+const store = useUserStore()
 </script>
 
 <template>
-  <NuxtLink v-if="user" :to="`/profile/${user.id}`">
+  <NuxtLink v-if="store.user" :to="`/profile/${store.user.id}`">
     <Avatar class="bg-amber-500">
-      <AvatarImage v-if="user.imageUrl" :src="user.imageUrl" alt="avatar" />
+      <AvatarImage v-if="store.user.imageUrl" :src="store.user.imageUrl" alt="avatar" />
       <AvatarFallback class="text-lg">
-        {{ user.username[0] }}
+        {{ store.user.username[0] }}
       </AvatarFallback>
     </Avatar>
   </NuxtLink>

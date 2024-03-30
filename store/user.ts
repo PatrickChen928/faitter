@@ -7,15 +7,18 @@ interface UserInfo {
   imageUrl: string
 }
 
-export const useUserStore = defineStore('userInfo', () => {
-  const userInfo = ref<UserInfo>()
+export const useUserStore = defineStore('user', () => {
+  const user = ref<UserInfo>()
 
   function setUserInfo(newUserInfo: UserInfo) {
-    userInfo.value = newUserInfo
+    user.value = newUserInfo
   }
 
   return {
-    userInfo,
+    user,
     setUserInfo,
   }
 })
+
+if (import.meta.hot)
+  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))

@@ -3,7 +3,7 @@ import { useUserStore } from '@/store/user'
 import { sidebarLinks } from '@/constants/menu'
 
 const route = useRoute()
-const { userInfo: user } = useUserStore()
+const store = useUserStore()
 
 const activeLink = ref('')
 
@@ -26,10 +26,10 @@ async function handleLogout() {
       <NuxtLink to="/" class="flex gap-3 items-center">
         <Logos class="h-10" />
       </NuxtLink>
-      <NuxtLink v-if="user" :to="`/profile/${user.id}`" class="flex gap-3 items-center">
+      <NuxtLink v-if="store.user" :to="`/profile/${store.user.id}`" class="flex gap-3 items-center">
         <Profile />
         <p class="body-bold">
-          {{ user.username }}
+          {{ store.user.username }}
         </p>
       </NuxtLink>
       <ul class="flex flex-col gap-6">
