@@ -29,17 +29,44 @@ const onSubmit = handleSubmit(async (values) => {
         <FormMessage />
       </FormItem>
     </FormField>
-    <FormField v-slot="{ componentField }" name="password">
+    <FormField v-slot="{ componentField }" name="file">
       <FormItem>
-        <FormLabel>Password</FormLabel>
+        <FormLabel>Add Photos</FormLabel>
         <FormControl>
-          <Input type="password" placeholder="Please enter your password" class="shad-input" v-bind="componentField" />
+          <FileUpload v-bind="componentField" />
         </FormControl>
         <FormMessage />
       </FormItem>
     </FormField>
-    <ButtonLoading variant="primary" :loading="loading" type="submit" class="w-full mt-4">
-      Create Post
-    </ButtonLoading>
+    <FormField v-slot="{ componentField }" name="location">
+      <FormItem>
+        <FormLabel>
+          Add Location
+        </FormLabel>
+        <FormControl>
+          <Input type="text" placeholder="Please enter your location" class="shad-input" v-bind="componentField" />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    </FormField>
+    <FormField v-slot="{ componentField }" name="tags">
+      <FormItem>
+        <FormLabel>
+          Add Tags (separated by comma " , ")
+        </FormLabel>
+        <FormControl>
+          <Input type="text" placeholder="JS, Vue, NuxtJS, React, NextJS" class="shad-input" v-bind="componentField" />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    </FormField>
+    <div class="flex items-center gap-4 justify-end">
+      <Button type="button" class="shad-button_dark_4">
+        Cancel
+      </Button>
+      <ButtonLoading variant="primary" :loading="loading" type="submit">
+        Submit
+      </ButtonLoading>
+    </div>
   </form>
 </template>
