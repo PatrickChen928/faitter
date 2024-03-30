@@ -14,16 +14,29 @@ export interface User {
   imageUrl?: string
 }
 
+export interface Post {
+  id: string
+  creator: string
+  caption: string
+  tags: string[]
+  location: string
+  imageUrl: string
+  imageId: string
+  createdAt: string
+
+  user: User
+}
+
 export interface Database {
   public: {
     Tables: {
       User: {
-        Row: Partial<User>
+        Row: User
         Insert: Partial<User>
         Update: Partial<User>
       }
       Post: {
-        Row: Partial<Post>
+        Row: Post
         Insert: Partial<Post>
         Update: Partial<Post>
       }
@@ -41,15 +54,4 @@ export interface Database {
       [_ in never]: never
     }
   }
-}
-
-export interface Post {
-  id: string
-  creator: string
-  caption: string
-  tags: string[]
-  location: string
-  imageUrl: string
-  imageId: string
-  createdAt: string
 }

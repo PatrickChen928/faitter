@@ -50,3 +50,22 @@ export async function useCreatePost(post: IPost) {
 
   return data
 }
+
+export async function useGetPosts() {
+  const supabase = useSupabaseClient<Database>()
+  const { data, error } = await supabase.from(PostTableName).select(`
+    id, 
+    caption,
+    imageUrl,
+    location,
+    tags,
+    creator,
+    createdAt,
+    user: creator ( id, username, imageUrl )
+  `).order('createdAt', { ascending: false }).limit(20)
+
+  if (error)
+    throw error
+
+  return data as any as Post[]
+}
