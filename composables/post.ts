@@ -17,6 +17,7 @@ export async function useCreatePost(post: IPost) {
 
   const supabase = useSupabaseClient<Database>()
   let fileUrl = ''
+  let filePath = ''
   if (post.file && post.file.length) {
     const file = post.file[0]
     const { error, data: storage } = await supabase
@@ -29,7 +30,10 @@ export async function useCreatePost(post: IPost) {
     if (error)
       throw error
 
-    fileUrl = storage?.path || ''
+    filePath = storage?.path || ''
+    const res = supabase.storage.from(StorageBucket).getPublicUrl(filePath)
+
+    fileUrl = res.data.publicUrl || ''
   }
 
   const { data, error } = await supabase.from(PostTableName).insert({
@@ -38,6 +42,7 @@ export async function useCreatePost(post: IPost) {
     creator: userStore.user.id,
     location: post.location,
     tags: post.tags?.split(','),
+    imageId: filePath,
   })
 
   if (error)
