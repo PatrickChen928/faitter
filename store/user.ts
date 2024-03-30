@@ -1,3 +1,5 @@
+import { acceptHMRUpdate, defineStore } from 'pinia'
+
 interface UserInfo {
   id: string
   username: string
@@ -5,4 +7,15 @@ interface UserInfo {
   imageUrl: string
 }
 
-export const userInfoState = useState<UserInfo | null>('userInfo', () => null)
+export const useUserStore = defineStore('userInfo', () => {
+  const userInfo = ref<UserInfo>()
+
+  function setUserInfo(newUserInfo: UserInfo) {
+    userInfo.value = newUserInfo
+  }
+
+  return {
+    userInfo,
+    setUserInfo,
+  }
+})

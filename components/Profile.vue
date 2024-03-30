@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { userInfoState as user } from '@/store/user'
+import { useUserStore } from '@/store/user'
+
+const { userInfo: user } = useUserStore()
 </script>
 
 <template>

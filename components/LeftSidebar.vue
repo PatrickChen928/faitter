@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { userInfoState as user } from '@/store/user'
+import { useUserStore } from '@/store/user'
 import { sidebarLinks } from '@/constants/menu'
 
 const route = useRoute()
+const { userInfo: user } = useUserStore()
+
 const activeLink = ref('')
 
 function setActiveLink(link: string) {

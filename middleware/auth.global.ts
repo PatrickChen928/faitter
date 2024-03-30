@@ -4,7 +4,9 @@ const filterRoutes = [
 ]
 
 export default defineNuxtRouteMiddleware((to) => {
+  const nuxtApp = useNuxtApp()
+
   const user = useSupabaseUser()
   if (!user.value && !filterRoutes.includes(to.path))
-    return navigateTo('/login')
+    return nuxtApp.runWithContext(() => navigateTo('/login'))
 })

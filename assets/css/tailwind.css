@@ -317,6 +317,11 @@ body,
   .user-card {
     @apply flex-center flex-col gap-4 border border-dark-4 rounded-[20px] px-5 py-8;
   }
+
+  /* Icon */
+  .icon-invert {
+    @apply invert dark:invert-0;
+  }
 }
 
 @layer components {
@@ -332,15 +337,19 @@ body,
   }
 
   .dark .shad-input {
-    @apply h-12 bg-dark-4 border-none placeholder:text-light-4 focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-light-3 !important;
+    @apply bg-dark-3 ;
   }
 
   .shad-input {
     @apply h-12 focus-visible:ring-1 focus-visible:ring-offset-1 !important;
   }
 
+  .dark .shad-textarea {
+    @apply bg-dark-3;
+  }
+
   .shad-textarea {
-    @apply h-36 bg-dark-3 rounded-xl border-none focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-light-3 !important;
+    @apply h-36  rounded-xl focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-light-3 !important;
   }
 
   /* Button */
