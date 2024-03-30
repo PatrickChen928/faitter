@@ -25,6 +25,18 @@ export interface Post {
   createdAt: string
 
   user: User
+  likes: string[]
+}
+
+export interface Like {
+  id: string
+  creator: string
+
+  post: string
+  postInfo: Post
+
+  user: string
+  userInfo: User
 }
 
 export interface Database {
