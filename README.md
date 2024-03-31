@@ -6,8 +6,6 @@
 <a href="">Faitter</a>
 </h2><br>
 
-# Faitter
-
 Welcome to our social media app! This platform is designed to connect people from all walks of life, fostering meaningful interactions and sharing of experiences. Here's a brief overview of what makes our app unique:
 
 ## Technology Stack

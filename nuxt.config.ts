@@ -35,7 +35,7 @@ export default defineNuxtConfig({
   },
 
   css: [
-    '~/assets/css/tailwind.css',
+    '~/public/css/tailwind.css',
   ],
 
   postcss: {
@@ -68,7 +68,7 @@ export default defineNuxtConfig({
   },
 
   image: {
-    dir: 'assets',
+    dir: 'public',
     domains: [
       'faitter.vercel.app',
     ],
