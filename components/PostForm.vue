@@ -13,6 +13,8 @@ const router = useRouter()
 const { toast } = useToast()
 const formSchema = toTypedSchema(CreatePostValidation)
 
+const isUpdate = !!props.post
+
 const { handleSubmit, values, setFieldValue } = useForm({
   validationSchema: formSchema,
   initialValues: {
@@ -24,7 +26,7 @@ const { handleSubmit, values, setFieldValue } = useForm({
 })
 
 const { execute, error, status } = useAsyncData('createPost', async () => {
-  if (props.post)
+  if (isUpdate)
     return await useUpdatePost(props.post.id, values as IPost)
   else
     return await useCreatePost(values as IPost)
@@ -44,7 +46,7 @@ const onSubmit = handleSubmit(async () => {
     toast({
       title: 'Post created successfully',
     })
-    router.push('/')
+    router.push(isUpdate ? `/posts/${props.post.id}` : '/')
   }
 })
 
