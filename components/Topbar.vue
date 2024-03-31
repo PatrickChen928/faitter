@@ -21,6 +21,7 @@ async function handleLogout() {
           <IconLogout class="fill-primary" />
         </Button>
         <Profile
+          :id="store.user?.id || ''"
           :image-url="store.user?.imageUrl"
           :username="store.user?.username || ''"
         />

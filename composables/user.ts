@@ -23,3 +23,21 @@ export async function useGetUsers() {
 
   return data as any as User[]
 }
+
+export async function useGetUserById(id: string) {
+  const supabase = useSupabaseClient<Database>()
+  const { data, error } = await supabase.from(UserTableName).select(`
+    id,
+    username,
+    imageUrl
+  `).eq('id', id).single() as any
+
+  const posts = await useGetPostsByUserId(id)
+
+  if (error)
+    throw error
+
+  data.posts = posts
+
+  return data as any as User
+}

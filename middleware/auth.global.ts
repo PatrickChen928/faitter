@@ -9,4 +9,6 @@ export default defineNuxtRouteMiddleware((to) => {
   const user = useSupabaseUser()
   if (!user.value && !filterRoutes.includes(to.path))
     return nuxtApp.runWithContext(() => navigateTo('/login'))
+
+    useState('routeParamId', () => (to.params as any).id)
 })

@@ -1,29 +1,41 @@
 <script setup lang="ts">
-import { useUserStore } from '@/store/user'
-import type { User } from '@/types/database.types'
-
-defineProps<{
-  className?: {
-    type: string
-    default: 'w-10 h-10'
-  }
-  imageUrl?: string
-  username: string
-}>()
-
-const store = useUserStore()
+defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
+  imageUrl: {
+    type: String,
+    required: false,
+  },
+  username: {
+    type: String,
+    default: '',
+    required: true,
+  },
+  avatarClass: {
+    type: String,
+    default: 'w-10 h-10',
+    required: false,
+  },
+  fallbackClass: {
+    type: String,
+    default: 'text-lg',
+    required: false,
+  },
+})
 </script>
 
 <template>
-  <NuxtLink v-if="store.user" :to="`/profile/${store.user.id}`">
-    <Avatar class="bg-amber-500" :class="className">
+  <NuxtLink v-if="id" :to="`/profile/${id}`">
+    <Avatar class="bg-amber-500" :class="avatarClass">
       <AvatarImage
-        v-if="store.user.imageUrl"
-        :src="store.user.imageUrl"
+        v-if="imageUrl"
+        :src="imageUrl"
         alt="avatar"
       />
-      <AvatarFallback class="text-lg">
-        {{ store.user.username[0] }}
+      <AvatarFallback :class="fallbackClass">
+        {{ username[0] }}
       </AvatarFallback>
     </Avatar>
   </NuxtLink>

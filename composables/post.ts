@@ -218,3 +218,51 @@ export async function useSearchPosts(searchItem: string) {
 
   return data as any as Post[]
 }
+
+export async function useGetPostsByUserId(userId: string) {
+  const supabase = useSupabaseClient<Database>()
+  const { data, error } = await supabase.from(PostTableName).select(`
+  id, 
+  caption,
+  imageUrl,
+  location,
+  tags,
+  creator,
+  createdAt,
+  likes,
+  user: creator ( id, username, imageUrl )
+  `).eq('creator', userId)
+
+  if (error)
+    throw error
+
+  return data as any as Post[]
+}
+
+export async function useGetSelfPosts() {
+  const user = authedUser()
+
+  return await useGetPostsByUserId(user.id)
+}
+
+export async function useGetLikedPosts() {
+  const user = authedUser()
+
+  const supabase = useSupabaseClient<Database>()
+  const { data, error } = await supabase.from(PostTableName).select(`
+  id, 
+  caption,
+  imageUrl,
+  location,
+  tags,
+  creator,
+  createdAt,
+  likes,
+  user: creator ( id, username, imageUrl )
+`).contains('likes', [user.id])
+
+  if (error)
+    throw error
+
+  return data as any as Post[]
+}

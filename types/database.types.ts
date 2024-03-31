@@ -12,6 +12,8 @@ export interface User {
   createdAt: string
   bio?: string
   imageUrl?: string
+
+  posts?: Post[]
 }
 
 export interface Post {

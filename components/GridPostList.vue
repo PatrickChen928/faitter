@@ -33,6 +33,7 @@ const userStore = useUserStore()
       <div class="grid-post_user">
         <div v-if="showUser" class="flex items-center justify-start gap-2 flex-1">
           <Profile
+            :id="post.user.id"
             :image-url="post.user.imageUrl"
             :username="post.user.username"
           />

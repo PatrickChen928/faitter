@@ -33,6 +33,7 @@ function handleDeletePost() {
             class="flex items-center gap-3"
           >
             <Profile
+              :id="post.user.id"
               :image-url="post.user.imageUrl"
               :username="post.user.username"
             />

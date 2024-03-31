@@ -20,6 +20,7 @@ const userStore = useUserStore()
           class="flex items-center gap-2"
         >
           <Profile
+            :id="post.user.id"
             :image-url="post.user.imageUrl"
             :username="post.user.username"
           />

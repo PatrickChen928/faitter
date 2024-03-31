@@ -28,6 +28,7 @@ async function handleLogout() {
       </NuxtLink>
       <NuxtLink v-if="store.user" :to="`/profile/${store.user.id}`" class="flex gap-3 items-center">
         <Profile
+          :id="store.user.id"
           :image-url="store.user.imageUrl"
           :username="store.user.username"
         />
