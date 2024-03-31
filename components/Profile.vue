@@ -35,7 +35,7 @@ defineProps({
         alt="avatar"
       />
       <AvatarFallback :class="fallbackClass">
-        {{ username[0] }}
+        {{ username?.[0] || 'U' }}
       </AvatarFallback>
     </Avatar>
   </NuxtLink>

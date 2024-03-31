@@ -1,5 +1,10 @@
-import { UserTableName } from '@/constants/table'
+import { StorageBucket, UserTableName } from '@/constants/table'
 import type { Database, User } from '@/types/database.types'
+
+export interface IUser {
+  bio: string
+  file: File[]
+}
 
 export async function logout() {
   const supabase = useSupabaseClient()
@@ -35,14 +40,52 @@ export async function useGetUserById(id: string) {
     id,
     username,
     imageUrl
-  `).eq('id', id).single() as any
+  `).eq('id', id) as any
 
   const posts = await useGetPostsByUserId(id)
 
   if (error)
     throw error
 
-  data.posts = posts
+  const user = data[0] as User
+  user.posts = posts
+
+  return user as any as User
+}
+
+export async function useUpdateUser(user: IUser) {
+  const self = authedUser()
+
+  const supabase = useSupabaseClient<Database>()
+
+  const params: Partial<User> = {
+    bio: user.bio,
+  }
+
+  if (user.file && user.file.length) {
+    const file = user.file[0]
+    const { error, data: storage } = await supabase
+      .storage
+      .from(StorageBucket)
+      .upload(`${self.id}/avatar/${file.name}`, file, {
+        cacheControl: '3600',
+        upsert: true,
+      })
+    if (error)
+      throw error
+
+    const filePath = storage?.path || ''
+    const res = supabase.storage.from(StorageBucket).getPublicUrl(filePath)
+
+    const fileUrl = res.data.publicUrl || ''
+    params.imageUrl = fileUrl
+    params.imageId = filePath
+  }
+
+  const { data, error } = await supabase.from(UserTableName).upsert(params).eq('id', self.id)
+
+  if (error)
+    throw error
 
   return data as any as User
 }

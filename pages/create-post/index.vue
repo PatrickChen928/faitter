@@ -9,8 +9,8 @@
           src="/icons/add-post.svg"
           width="36"
           height="36"
-          class="icon-invert"
           alt="add"
+          class="icon-invert"
         />
         <h2 class="h3-bold md:h2-bold text-left w-full">
           Create Post

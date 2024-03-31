@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 
-const id = (route.params as { id: string }).id;
+const id = (route.params as { id: string }).id
 
 const { data } = await useAsyncData('getPostDetail', () => {
   return useGetPostDetail(id)
@@ -17,6 +17,7 @@ const { data } = await useAsyncData('getPostDetail', () => {
           alt="add"
           width="36"
           height="36"
+          class="icon-invert"
         />
         <h2 class="h3-bold md:h2-bold text-left w-full">
           Edit Post

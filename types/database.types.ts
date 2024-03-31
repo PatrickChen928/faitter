@@ -12,6 +12,7 @@ export interface User {
   createdAt: string
   bio?: string
   imageUrl?: string
+  imageId?: string
 
   posts?: Post[]
 }
