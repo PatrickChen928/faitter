@@ -301,7 +301,7 @@ body,
   }
 
   .grid-post_user {
-    @apply absolute bottom-0 p-5 flex-between w-full bg-gradient-to-t from-slate-200 dark:from-dark-3 to-transparent rounded-b-[24px] gap-2;
+    @apply absolute bottom-0 p-5 flex-between w-full bg-gradient-to-t from-dark-3 to-transparent rounded-b-[24px] gap-2 text-white;
   }
 
   /* Left sidebar */
