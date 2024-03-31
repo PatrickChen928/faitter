@@ -39,7 +39,7 @@ export async function useCreatePost(post: IPost) {
     caption: post.caption,
     creator: user.id,
     location: post.location,
-    tags: post.tags?.split(','),
+    tags: post.tags?.replace(/ /g, '').split(','),
     imageId: filePath,
   })
 
@@ -78,7 +78,7 @@ export async function useUpdatePost(id: string, post: IPost) {
     caption: post.caption,
     creator: user.id,
     location: post.location,
-    tags: post.tags?.split(','),
+    tags: post.tags?.replace(/ /g, '').split(','),
   }
 
   if (fileUrl) {

@@ -27,7 +27,6 @@ const { execute, error, status } = useAsyncData('createPost', async () => {
   if (props.post)
     return await useUpdatePost(props.post.id, values as IPost)
   else
-
     return await useCreatePost(values as IPost)
 }, {
   immediate: false,

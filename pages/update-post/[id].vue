@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 
-const id = route.params.id
+const id = (route.params as { id: string }).id;
 
 const { data } = await useAsyncData('getPostDetail', () => {
   return useGetPostDetail(id)
