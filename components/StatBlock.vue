@@ -16,7 +16,7 @@ defineProps({
     <p class="small-semibold lg:body-bold text-primary-500">
       {{ value || 0 }}
     </p>
-    <p class="small-medium lg:base-medium text-light-2">
+    <p class="small-medium lg:base-medium text-muted-foreground">
       {{ label }}
     </p>
   </div>

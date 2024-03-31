@@ -75,7 +75,7 @@ const { data: currentUser, status } = await useAsyncData('getUserById', async ()
         <NuxtLink
           :to="`/profile/${id}`"
           class="profile-tab rounded-l-lg !bg-transparent"
-          :class="route.path === `/profile/${id}` && '!bg-slate-100 dark:!bg-dark-1'"
+          :class="route.path === `/profile/${id}` && '!bg-slate-300 dark:!bg-dark-1'"
         >
           <NuxtImg
             src="/icons/posts.svg"
@@ -88,8 +88,8 @@ const { data: currentUser, status } = await useAsyncData('getUserById', async ()
         </NuxtLink>
         <NuxtLink
           :to="`/profile/${id}/liked-posts`"
-          class="profile-tab rounded-r-lg !bg-transparent"
-          :class="route.path === `/profile/${id}/liked-posts` && '!bg-slate-100 dark:!bg-dark-1'"
+          class="profile-tab rounded-r-lg !bg-muted"
+          :class="route.path === `/profile/${id}/liked-posts` && '!bg-slate-300 dark:!bg-dark-1'"
         >
           <NuxtImg
             src="/icons/like.svg"
