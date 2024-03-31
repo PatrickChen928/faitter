@@ -5,8 +5,10 @@ const userStore = useUserStore()
 
 const { data: posts, status } = await useAsyncData('getPosts', async () => {
   return useGetPosts()
-}, {
-  immediate: true,
+})
+
+const { data: users, status: userStatus } = await useAsyncData('getTopUsers', async () => {
+  return useGetUsers(10)
 })
 </script>
 
@@ -30,6 +32,17 @@ const { data: posts, status } = await useAsyncData('getPosts', async () => {
           />
         </ul>
       </div>
+    </div>
+    <div class="home-creators">
+      <h3 class="h3-bold text-primary/80">
+        Top Creators
+      </h3>
+      <Loader v-if="userStatus === 'pending'" />
+      <ul class="grid 2xl:grid-cols-2 gap-6">
+        <li v-for="user in users" :key="user.id">
+          <UserCard :user="user" />
+        </li>
+      </ul>
     </div>
   </div>
 </template>

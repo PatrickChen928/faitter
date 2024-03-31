@@ -8,15 +8,20 @@ export async function logout() {
   router.push('/login')
 }
 
-export async function useGetUsers() {
+export async function useGetUsers(limit?: number) {
   const user = authedUser()
 
   const supabase = useSupabaseClient<Database>()
-  const { data, error } = await supabase.from(UserTableName).select(`
+  const query = supabase.from(UserTableName).select(`
     id,
     username,
     imageUrl
   `).not('id', 'eq', user.id)
+
+  if (limit)
+    query.limit(limit)
+
+  const { data, error } = await query
 
   if (error)
     throw error
