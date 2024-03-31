@@ -26,8 +26,8 @@ async function getSavedPost() {
   }
 }
 
-getUserInfo()
-getSavedPost()
+await getUserInfo()
+await getSavedPost()
 </script>
 
 <template>

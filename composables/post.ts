@@ -242,7 +242,23 @@ export async function useGetPostsByUserId(userId: string) {
 export async function useGetSelfPosts() {
   const user = authedUser()
 
-  return await useGetPostsByUserId(user.id)
+  const supabase = useSupabaseClient<Database>()
+  const { data, error } = await supabase.from(PostTableName).select(`
+  id, 
+  caption,
+  imageUrl,
+  location,
+  tags,
+  creator,
+  createdAt,
+  likes,
+  user: creator ( id, username, imageUrl )
+  `).eq('creator', user.id)
+
+  if (error)
+    throw error
+
+  return data as any as Post[]
 }
 
 export async function useGetLikedPosts() {
