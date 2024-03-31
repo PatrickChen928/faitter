@@ -266,3 +266,23 @@ export async function useGetLikedPosts() {
 
   return data as any as Post[]
 }
+
+export async function useGetPostsByIds(ids: string[]) {
+  const supabase = useSupabaseClient<Database>()
+  const { data, error } = await supabase.from(PostTableName).select(`
+  id, 
+  caption,
+  imageUrl,
+  location,
+  tags,
+  creator,
+  createdAt,
+  likes,
+  user: creator ( id, username, imageUrl )
+`).in('id', ids)
+
+  if (error)
+    throw error
+
+  return data as any as Post[]
+}

@@ -38,3 +38,22 @@ export async function useGetSavedPosts() {
 
   return data as any as Save[]
 }
+
+export async function useGetSavedPostsAll() {
+  const user = authedUser()
+
+  const supabase = useSupabaseClient<Database>()
+
+  const { data, error } = await supabase.from(SaveTableName).select('*').eq('user', user.id)
+
+  if (error)
+    throw error
+
+  if (!data.length)
+    return []
+
+  const postIds = data.map((save: Save) => save.post)
+
+  const posts = await useGetPostsByIds(postIds)
+  return posts
+}
