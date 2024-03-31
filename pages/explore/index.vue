@@ -6,14 +6,33 @@ const page = ref(0)
 const isLastPage = ref(false)
 const searchResults = ref<Post[]>([])
 const isSearching = ref(false)
+const target = ref<HTMLElement | null>(null)
+const pagedPosts = ref<Post[]>([])
 
-const { data: pagedPosts, status } = await useAsyncData('getInfinitePosts', async () => {
+let stopFn: () => void
+
+const { status, execute } = await useAsyncData('getInfinitePosts', async () => {
+  if (isLastPage.value)
+    return
   const res = await useGetInfinitePosts(page.value)
-  if (!res || res.length === 0)
+  if (!res || res.length === 0) {
+    stopFn?.()
     isLastPage.value = true
-
+  }
+  pagedPosts.value.push(...res)
   return res
 })
+
+const { stop } = useIntersectionObserver(
+  target,
+  ([{ isIntersecting }]) => {
+    if (isIntersecting) {
+      page.value++
+      execute()
+    }
+  },
+)
+stopFn = stop
 
 const doSearch = useDebounceFn(async () => {
   try {
@@ -82,14 +101,16 @@ function handleSearch() {
         :is-searching="isSearching"
         :search-results="searchResults"
       />
-      <p v-else-if="isLastPage" class="mt-10 text-center w-full text-muted-foreground">
+      <GridPostList
+        v-else
+        :posts="pagedPosts || []"
+      />
+      <p v-if="isLastPage && !searchValue" class="mt-10 text-center w-full text-muted-foreground">
         End of posts
       </p>
-      <template v-else>
-        <GridPostList
-          :posts="pagedPosts || []"
-        />
-      </template>
+    </div>
+    <div v-if="!isLastPage && !searchValue" ref="target" class="mt-10">
+      <Loader />
     </div>
   </div>
 </template>
