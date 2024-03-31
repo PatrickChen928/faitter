@@ -17,6 +17,10 @@ const likesCount = ref(props.post.likes?.length || 0)
 
 const isSaved = ref(props.saved || false)
 
+watch(() => props.saved, () => {
+  isSaved.value = props.saved
+})
+
 watchEffect(() => {
   isLiked.value = !!(userStore.user && props.post.likes?.includes(userStore.user.id))
 })

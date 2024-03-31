@@ -9,14 +9,20 @@ interface UserInfo {
 
 export const useUserStore = defineStore('user', () => {
   const user = ref<UserInfo>()
+  const savedPostIds = ref<string[]>([])
 
   function setUserInfo(newUserInfo: UserInfo) {
     user.value = newUserInfo
   }
+  function setSavedPostIds(ids: string[]) {
+    savedPostIds.value.push(...ids)
+  }
 
   return {
     user,
+    savedPostIds,
     setUserInfo,
+    setSavedPostIds,
   }
 })
 

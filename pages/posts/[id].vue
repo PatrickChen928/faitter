@@ -90,6 +90,7 @@ function handleDeletePost() {
           <PostStats
             :post="post"
             :user-id="userStore.user?.id"
+            :saved="userStore.savedPostIds?.includes(post.id)"
           />
         </div>
       </div>

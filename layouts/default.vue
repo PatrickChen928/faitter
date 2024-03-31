@@ -5,7 +5,7 @@ import { UserTableName } from '@/constants/table'
 
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
-const { setUserInfo } = useUserStore()
+const { setUserInfo, setSavedPostIds } = useUserStore()
 async function getUserInfo() {
   const email = user.value?.email
   if (!email)
@@ -16,9 +16,18 @@ async function getUserInfo() {
     setUserInfo(data)
 }
 
-onMounted(() => {
-  getUserInfo()
-})
+async function getSavedPost() {
+  try {
+    const res = await useGetSavedPosts()
+    setSavedPostIds(res.map(post => post.post))
+  }
+  catch (e) {
+
+  }
+}
+
+getUserInfo()
+getSavedPost()
 </script>
 
 <template>

@@ -1,19 +1,13 @@
 <script setup lang="ts">
-const { data, status } = await useAsyncData('getPosts', async () => {
-  const [posts, savedPosts] = await Promise.all([
-    useGetPosts(),
-    useGetSavedPosts(),
-  ])
-  return {
-    posts,
-    savedPosts,
-  }
+import { useUserStore } from '@/store/user'
+
+const userStore = useUserStore()
+
+const { data: posts, status } = await useAsyncData('getPosts', async () => {
+  return useGetPosts()
 }, {
   immediate: true,
 })
-
-const posts = computed(() => data.value?.posts)
-const savedPosts = computed(() => data.value?.savedPosts)
 </script>
 
 <template>
@@ -32,7 +26,7 @@ const savedPosts = computed(() => data.value?.savedPosts)
             v-for="post in posts"
             :key="post.id"
             :post="post"
-            :saved="!!savedPosts?.find((savedPost) => savedPost.post === post.id)"
+            :saved="!!userStore.savedPostIds?.includes(post.id)"
           />
         </ul>
       </div>
