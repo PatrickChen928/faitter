@@ -3,15 +3,14 @@ const router = useRouter()
 </script>
 
 <template>
-  <main class="px-4 py-10 text-center text-teal-700 dark:text-gray-200">
-    <div text-4xl>
-      <div i-carbon-warning class="inline-block" />
+  <main class="w-full flex flex-col justify-center items-center gap-4 p-4">
+    <div class="text-muted-foreground">
+      Not found
     </div>
-    <div>Not found</div>
     <div>
-      <button @click="router.push('/')">
+      <Button variant="secondary" @click="router.push('/')">
         Back to home
-      </button>
+      </Button>
     </div>
   </main>
 </template>
