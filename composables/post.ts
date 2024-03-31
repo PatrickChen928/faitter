@@ -161,3 +161,20 @@ export async function useLikePost(postId: string) {
 
   return { isLiked: !isLiked }
 }
+
+export async function useDeletePost(id: string) {
+  const user = authedUser()
+
+  const supabase = useSupabaseClient<Database>()
+
+  const post = await supabase.from(PostTableName).select('*').eq('id', id).eq('creator', user.id).single()
+
+  if (post.error)
+    throw post.error
+
+  if (!post.data)
+    throw new Error('Post not found')
+
+  const res = await supabase.from(PostTableName).delete().eq('id', id)
+  return res
+}

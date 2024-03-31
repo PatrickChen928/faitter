@@ -52,7 +52,9 @@ const userStore = useUserStore()
     </div>
     <NuxtLink :to="`/posts/${post.id}`">
       <div class="small-medium lg:base-medium py-5">
-        <p>{{ post.caption }}</p>
+        <p>
+          {{ post.caption }}
+        </p>
         <ul v-if="post.tags && post.tags.length" class="flex gap-1 mt-2">
           <li v-for="(tag, index) in post.tags" :key="index" class="text-muted-foreground">
             #{{ tag }}

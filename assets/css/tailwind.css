@@ -226,7 +226,7 @@ body,
   }
 
   .post_details-card {
-    @apply bg-dark-2 w-full max-w-5xl rounded-[30px] flex-col flex xl:flex-row border border-dark-4 xl:rounded-l-[24px];
+    @apply bg-slate-200 dark:bg-dark-2 w-full max-w-5xl rounded-[30px] flex-col flex xl:flex-row border xl:rounded-l-[24px];
   }
 
   .post_details-img {
@@ -234,7 +234,7 @@ body,
   }
 
   .post_details-info {
-    @apply bg-dark-2 flex flex-col gap-5 lg:gap-7 flex-1 items-start p-8 rounded-[30px];
+    @apply bg-slate-200 dark:bg-dark-2 flex flex-col gap-5 lg:gap-7 flex-1 items-start p-8 rounded-[30px];
   }
 
   .post_details-delete_btn {
@@ -251,7 +251,7 @@ body,
   }
 
   .profile-tab {
-    @apply flex-center gap-3 py-4 w-48 bg-dark-2 transition flex-1 xl:flex-initial;
+    @apply flex-center gap-3 py-4 w-48 bg-slate-200 dark:bg-dark-2 transition flex-1 xl:flex-initial;
   }
 
   /* Saved */
@@ -283,7 +283,7 @@ body,
   }
 
   .grid-post_link {
-    @apply flex rounded-[24px] border border-dark-4 overflow-hidden cursor-pointer w-full h-full;
+    @apply flex rounded-[24px] border overflow-hidden cursor-pointer w-full h-full;
   }
 
   .grid-post_user {
@@ -301,7 +301,7 @@ body,
 
   /* Post Card */
   .post-card {
-    @apply bg-slate-100 dark:bg-dark-2 rounded-3xl border p-5 lg:p-7 w-full max-w-screen-sm;
+    @apply bg-slate-200 dark:bg-dark-2 rounded-3xl border p-5 lg:p-7 w-full max-w-screen-sm;
   }
 
   .post-card_img {
@@ -315,7 +315,7 @@ body,
 
   /* User card */
   .user-card {
-    @apply flex-center flex-col gap-4 border border-dark-4 rounded-[20px] px-5 py-8;
+    @apply flex-center flex-col gap-4 border rounded-[20px] px-5 py-8;
   }
 
   /* Icon */
