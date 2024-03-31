@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import type { User } from '@/types/database.types'
 import { useToast } from '@/components/ui/toast'
+import { useUserStore } from '@/store/user'
 
 defineProps<{
   user: User
 }>()
 
 const { toast } = useToast()
+
+const userStore = useUserStore()
 
 function handleFollow(e: any) {
   e.stopPropagation()
@@ -30,7 +33,14 @@ function handleFollow(e: any) {
       {{ user.username }}
     </p>
 
-    <Button variant="primary" type="button" size="sm" class="px-5" @click="handleFollow">
+    <Button
+      v-if="userStore.user?.id !== user.id"
+      variant="primary"
+      type="button"
+      size="sm"
+      class="px-5"
+      @click="handleFollow"
+    >
       Follow
     </Button>
   </NuxtLink>

@@ -43,9 +43,6 @@ const onSubmit = handleSubmit(async () => {
     })
   }
   else {
-    toast({
-      title: 'Post created successfully',
-    })
     router.push(isUpdate ? `/posts/${props.post.id}` : '/')
   }
 })

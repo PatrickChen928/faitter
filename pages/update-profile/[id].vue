@@ -7,7 +7,6 @@ import { UpdateProfileValidation } from '@/lib/form-schema'
 const route = useRoute()
 const id = (route.params as any).id
 
-const router = useRouter()
 const { toast } = useToast()
 const formSchema = toTypedSchema(UpdateProfileValidation)
 
@@ -21,7 +20,7 @@ const { handleSubmit, values, setFieldValue } = useForm({
   },
 })
 
-const { execute, error, status } = useAsyncData('updateProfile', () => {
+const { execute, error, status } = useAsyncData('updateUser', () => {
   return useUpdateUser(values as IUser)
 }, {
   immediate: false,
@@ -34,13 +33,9 @@ const onSubmit = handleSubmit(async () => {
       title: 'Somethings went wrong, please try again',
       variant: 'destructive',
     })
+    return
   }
-  else {
-    toast({
-      title: 'Profile updated successfully',
-    })
-    router.push(`/profile/${id}`)
-  }
+  navigateTo(`/profile/${id}`)
 })
 
 function handleFileChange(files: File[]) {

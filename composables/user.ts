@@ -20,7 +20,8 @@ export async function useGetUsers(limit?: number) {
   const query = supabase.from(UserTableName).select(`
     id,
     username,
-    imageUrl
+    imageUrl,
+    bio
   `).not('id', 'eq', user.id)
 
   if (limit)
@@ -39,7 +40,8 @@ export async function useGetUserById(id: string) {
   const { data, error } = await supabase.from(UserTableName).select(`
     id,
     username,
-    imageUrl
+    imageUrl,
+    bio
   `).eq('id', id) as any
 
   if (error)
@@ -95,7 +97,7 @@ export async function useUpdateUser(user: IUser) {
     params.imageId = filePath
   }
 
-  const { data, error } = await supabase.from(UserTableName).upsert(params).eq('id', self.id)
+  const { data, error } = await supabase.from(UserTableName).update(params).eq('id', self.id).select()
 
   if (error)
     throw error
