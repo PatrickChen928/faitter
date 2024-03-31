@@ -70,13 +70,11 @@ export default defineNuxtConfig({
   image: {
     dir: 'assets',
   },
-  runtimeConfig: {
-    // eslint-disable-next-line node/prefer-global/process
-    supabaseApiKey: process.env.SUPABASE_API_KEY,
-    // eslint-disable-next-line node/prefer-global/process
-    supabaseUrl: process.env.SUPABASE_SERVER_URL,
-  },
   supabase: {
+    // eslint-disable-next-line node/prefer-global/process
+    url: process.env.SUPABASE_SERVER_URL,
+    // eslint-disable-next-line node/prefer-global/process
+    key: process.env.SUPABASE_API_KEY,
     redirectOptions: {
       login: '/login',
       callback: '/',
