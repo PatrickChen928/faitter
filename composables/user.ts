@@ -1,5 +1,5 @@
-import { StorageBucket, UserTableName } from '@/constants/table'
-import type { Database, User } from '@/types/database.types'
+import { PostTableName, StorageBucket, UserTableName } from '@/constants/table'
+import type { Database, Post, User } from '@/types/database.types'
 
 export interface IUser {
   bio: string
@@ -42,13 +42,26 @@ export async function useGetUserById(id: string) {
     imageUrl
   `).eq('id', id) as any
 
-  const posts = await useGetPostsByUserId(id)
-
   if (error)
     throw error
 
+  const posts = await supabase.from(PostTableName).select(`
+  id, 
+  caption,
+  imageUrl,
+  location,
+  tags,
+  creator,
+  createdAt,
+  likes,
+  user: creator ( id, username, imageUrl )
+  `).eq('creator', id)
+
+  if (posts.error)
+    throw posts.error
+
   const user = data[0] as User
-  user.posts = posts
+  user.posts = posts.data as any as Post[]
 
   return user as any as User
 }

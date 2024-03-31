@@ -11,7 +11,7 @@ const pagedPosts = ref<Post[]>([])
 
 let stopFn: () => void
 
-const { status, execute } = await useAsyncData('getInfinitePosts', async () => {
+const { status } = await useAsyncData('getInfinitePosts', async () => {
   if (isLastPage.value)
     return
   const res = await useGetInfinitePosts(page.value)
@@ -21,15 +21,15 @@ const { status, execute } = await useAsyncData('getInfinitePosts', async () => {
   }
   pagedPosts.value.push(...res)
   return res
+}, {
+  watch: [page],
 })
 
 const { stop } = useIntersectionObserver(
   target,
   ([{ isIntersecting }]) => {
-    if (isIntersecting) {
+    if (isIntersecting)
       page.value++
-      execute()
-    }
   },
 )
 stopFn = stop

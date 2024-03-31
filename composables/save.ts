@@ -1,5 +1,5 @@
-import { SaveTableName } from '@/constants/table'
-import type { Database, Save } from '@/types/database.types'
+import { PostTableName, SaveTableName } from '@/constants/table'
+import type { Database, Post, Save } from '@/types/database.types'
 
 export async function useSavePost(postId: string) {
   const user = authedUser()
@@ -54,6 +54,20 @@ export async function useGetSavedPostsAll() {
 
   const postIds = data.map((save: Save) => save.post)
 
-  const posts = await useGetPostsByIds(postIds)
-  return posts
+  const posts = await supabase.from(PostTableName).select(`
+  id, 
+  caption,
+  imageUrl,
+  location,
+  tags,
+  creator,
+  createdAt,
+  likes,
+  user: creator ( id, username, imageUrl )
+`).in('id', postIds)
+
+  if (posts.error)
+    throw posts.error
+
+  return posts.data as any as Post[]
 }

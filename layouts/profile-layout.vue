@@ -6,11 +6,8 @@ const id = useState('routeParamId') as Ref<string>
 
 const userStore = useUserStore()
 
-const { data: currentUser, status } = await useAsyncData('getUserById', async () => {
-  if (id.value)
-    return await useGetUserById(id.value)
-
-  return null
+const { data: currentUser, status } = await useAsyncData('getUserById', () => {
+  return useGetUserById(id.value)
 })
 </script>
 
