@@ -5,6 +5,7 @@ const searchValue = ref('')
 const page = ref(0)
 const isLastPage = ref(false)
 const searchResults = ref<Post[]>([])
+const isSearching = ref(false)
 
 const { data: pagedPosts, status } = await useAsyncData('getInfinitePosts', async () => {
   const res = await useGetInfinitePosts(page.value)
@@ -14,9 +15,24 @@ const { data: pagedPosts, status } = await useAsyncData('getInfinitePosts', asyn
   return res
 })
 
-const handleSearch = useDebounceFn(async () => {
-  searchResults.value = await useSearchPosts(searchValue.value)
+const doSearch = useDebounceFn(async () => {
+  try {
+    searchResults.value = await useSearchPosts(searchValue.value)
+    isSearching.value = false
+  }
+  catch (e: any) {
+    console.error(e)
+  }
+  finally {
+    isSearching.value = false
+  }
 }, 500)
+
+function handleSearch() {
+  searchResults.value = []
+  isSearching.value = true
+  doSearch()
+}
 </script>
 
 <template>
@@ -40,7 +56,7 @@ const handleSearch = useDebounceFn(async () => {
           type="text"
           placeholder="Search"
           class="explore-search"
-          @change="handleSearch"
+          @input="handleSearch"
         />
       </div>
     </div>
@@ -61,7 +77,11 @@ const handleSearch = useDebounceFn(async () => {
       </div>
     </div>
     <div class="flex flex-wrap gap-9 w-full max-w-5xl">
-      <SearchResults v-if="searchValue !== ''" />
+      <SearchResults
+        v-if="searchValue !== ''"
+        :is-searching="isSearching"
+        :search-results="searchResults"
+      />
       <p v-else-if="isLastPage" class="mt-10 text-center w-full text-muted-foreground">
         End of posts
       </p>

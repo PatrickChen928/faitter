@@ -211,7 +211,7 @@ export async function useSearchPosts(searchItem: string) {
     createdAt,
     likes,
     user: creator ( id, username, imageUrl )
-  `).textSearch('caption', searchItem)
+  `).ilike('caption', `%${searchItem}%`)
 
   if (error)
     throw error
