@@ -19,7 +19,10 @@ const userStore = useUserStore()
           :to="`/profile/${post.creator}`"
           class="flex items-center gap-2"
         >
-          <Profile />
+          <Profile
+            :image-url="post.user.imageUrl"
+            :username="post.user.username"
+          />
         </NuxtLink>
         <div class="flex flex-col">
           <p>{{ post.user.username }}</p>

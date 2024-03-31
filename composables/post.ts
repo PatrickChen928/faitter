@@ -178,3 +178,43 @@ export async function useDeletePost(id: string) {
   const res = await supabase.from(PostTableName).delete().eq('id', id)
   return res
 }
+
+export async function useGetInfinitePosts(page: number) {
+  const supabase = useSupabaseClient<Database>()
+  const { data, error } = await supabase.from(PostTableName).select(`
+    id, 
+    caption,
+    imageUrl,
+    location,
+    tags,
+    creator,
+    createdAt,
+    likes,
+    user: creator ( id, username, imageUrl )
+  `).order('createdAt', { ascending: false }).range(page * 10, (page + 1) * 10)
+
+  if (error)
+    throw error
+
+  return data as any as Post[]
+}
+
+export async function useSearchPosts(searchItem: string) {
+  const supabase = useSupabaseClient<Database>()
+  const { data, error } = await supabase.from(PostTableName).select(`
+    id, 
+    caption,
+    imageUrl,
+    location,
+    tags,
+    creator,
+    createdAt,
+    likes,
+    user: creator ( id, username, imageUrl )
+  `).textSearch('caption', searchItem)
+
+  if (error)
+    throw error
+
+  return data as any as Post[]
+}

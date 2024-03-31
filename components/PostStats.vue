@@ -5,8 +5,7 @@ import type { Post } from '@/types/database.types'
 
 const props = defineProps<{
   post: Post
-  userId?: string
-  saved?: boolean
+  saved: boolean
 }>()
 
 const userStore = useUserStore()

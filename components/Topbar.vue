@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useUserStore } from '@/store/user'
+
+const store = useUserStore()
+
 async function handleLogout() {
   await logout()
 }
@@ -16,7 +20,10 @@ async function handleLogout() {
         <Button size="sm" variant="ghost" class="h-10 w-10 p-1" @click="handleLogout">
           <IconLogout class="fill-primary" />
         </Button>
-        <Profile />
+        <Profile
+          :image-url="store.user?.imageUrl"
+          :username="store.user?.username || ''"
+        />
       </div>
     </div>
   </section>

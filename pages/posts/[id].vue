@@ -32,7 +32,10 @@ function handleDeletePost() {
             :to="`/profile/${post.creator}`"
             class="flex items-center gap-3"
           >
-            <Profile />
+            <Profile
+              :image-url="post.user.imageUrl"
+              :username="post.user.username"
+            />
             <div class="flex flex-col">
               <p>{{ post.user.username }}</p>
               <div class="flex-center gap-2 text-muted-foreground">

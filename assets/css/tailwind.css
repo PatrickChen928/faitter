@@ -204,7 +204,7 @@ body,
   }
 
   .explore-search {
-    @apply h-12 bg-dark-4 border-none placeholder:text-light-4 focus-visible:ring-0 focus-visible:ring-offset-0 ring-offset-0 !important;
+    @apply h-12 bg-slate-300 dark:bg-dark-4 border-none placeholder:text-light-4 focus-visible:ring-0 focus-visible:ring-offset-0 ring-offset-0 !important;
   }
 
   /* Home */
@@ -287,7 +287,7 @@ body,
   }
 
   .grid-post_user {
-    @apply absolute bottom-0 p-5 flex-between w-full bg-gradient-to-t from-dark-3 to-transparent rounded-b-[24px] gap-2;
+    @apply absolute bottom-0 p-5 flex-between w-full bg-gradient-to-t from-slate-200 dark:from-dark-3 to-transparent rounded-b-[24px] gap-2;
   }
 
   /* Left sidebar */

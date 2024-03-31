@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { useUserStore } from '@/store/user'
+import type { User } from '@/types/database.types'
 
 defineProps<{
   className?: {
     type: string
     default: 'w-10 h-10'
   }
+  imageUrl?: string
+  username: string
 }>()
 
 const store = useUserStore()
