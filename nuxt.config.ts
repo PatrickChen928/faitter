@@ -69,6 +69,9 @@ export default defineNuxtConfig({
 
   image: {
     dir: 'assets',
+    domains: [
+      'faitter.vercel.app',
+    ],
   },
   supabase: {
     // eslint-disable-next-line node/prefer-global/process
