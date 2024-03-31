@@ -107,7 +107,7 @@ function handleFileChange(files: File[]) {
         Cancel
       </Button>
       <ButtonLoading variant="primary" :loading="status === 'pending'" type="submit">
-        Submit
+        {{ isUpdate ? 'Update' : 'Create' }} Post
       </ButtonLoading>
     </div>
   </form>
