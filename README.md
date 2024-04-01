@@ -20,10 +20,10 @@ Welcome to our social media app! This platform is designed to connect people fro
 
 Ready to join our social media community? Sign up now and start connecting with people around the world!
 
-[Sign Up](https://faitter.vercel.com/signup) - Join our community today!
+[Sign Up](https://faitter.vercel.app/signup) - Join our community today!
 
 ## Feedback
 
-We're constantly improving our app to provide the best possible experience for our users. If you have any feedback or suggestions, we'd love to hear from you! Please feel free to [contact us](#) with your thoughts.
+We're constantly improving our app to provide the best possible experience for our users. If you have any feedback or suggestions, we'd love to hear from you! Please feel free to leave issues with your thoughts.
 
 Thank you for choosing our social media app. We look forward to seeing you online!
